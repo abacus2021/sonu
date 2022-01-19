@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,iBADa,CACb,OAAO,CAAA;EACH,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,UAAU,EAAE,MAAM;EAClB,UAAU,EAAE,IAAI;CACnB",
+    "sources": [
+        "advance-text.scss"
+    ],
+    "names": [],
+    "file": "advance-text.css"
+}

@@ -1,0 +1,26 @@
+page-pdf-catalogue {
+    .pdf-list {
+        padding: 16px;
+
+        a{
+            display: block;
+            padding: 5px;
+            background: #f1fff3;
+            text-decoration: initial;
+            border-radius: 5px;
+            font-size: 12px;
+
+            span{
+                background: rgba(0, 0, 0, 0.1);
+                color: #000;
+                margin: -5px 0px 0px 0px;
+                display: block;
+                line-height: 28px;
+                padding: 5px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
+    }
+}

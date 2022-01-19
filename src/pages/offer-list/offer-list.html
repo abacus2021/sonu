@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title> {{'My Offer' | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="Product m16">
+        <button class="our-product" *ngFor="let list of offer_list;let i=index" (click)="goOnOffersPage(list.id)">
+            <div class="thumbnail">
+                <!-- <img src="{{uploadUrl}}{{list.offer_banner}}"> -->
+                <img src="{{list.offer_banner}}">
+            </div>
+            <div class="product-footer">
+                <p>{{lang != 'en'? list.hin_title : list.title |titlecase}}</p>
+                <span>{{'Valid Upto' | translate}} : {{list.end_date | date:'d MMMM y'}}</span>
+                <!-- <i class="material-icons">trending_flat</i> -->
+            </div>
+        </button>
+     
+    </div>
+    
+    <div class="no-content" *ngIf="offer_list.length == 0">
+        <img src="assets/imgs/no_found.svg" >
+        <p>{{'We are not running any offers in your region!' | translate}}</p>
+    </div>
+</ion-content>

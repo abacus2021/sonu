@@ -1,0 +1,200 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{'Profile' | translate}}</ion-title>
+        <ion-buttons end (click)=gotolanguage()>
+            <button ion-button icon-only >
+                <img src="assets/imgs/g-translate.svg" alt="">
+            </button>
+        </ion-buttons>
+        <ion-buttons end (click)="logout()" class="ml10">
+            <button ion-button icon-only >
+                <img src="assets/imgs/logout.svg" alt="">
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="main-backgroung">
+    <div class="pr-after">
+        <div class="profile-detail">
+            <div class="pr-align">
+                <div class="pr-circle">
+                    <div class="hidden-pr">
+                        <img src="assets/imgs/man.svg" *ngIf="karigar_detail.profile ==''">
+                        <img [src]="karigar_detail.profile" *ngIf="karigar_detail.profile" (click)="viewProfiePic()">
+                    </div>
+                    <button ion-button round color="primary"  (click)="openeditprofile()"><i class="material-icons" >camera_alt</i></button>
+                </div>
+                <div class="pr-tags">
+                    <h2>{{!karigar_detail.first_name ? 'N/A' : karigar_detail.first_name |titlecase}} {{karigar_detail.last_name |titlecase}}</h2>
+                    <p>{{karigar_detail.mobile_no ? karigar_detail.mobile_no : 'N/A'}}</p>
+                    <div class="profile-status {{karigar_detail.status}}" *ngIf="karigar_detail.user_type == 1 || karigar_detail.user_type == 2">
+                        <i class="material-icons" *ngIf="karigar_detail.status =='Verified'">verified_user</i>
+                        <i class="material-icons" *ngIf="karigar_detail.status =='Pending'">hourglass_full</i>
+                        <i class="material-icons" *ngIf="karigar_detail.status =='Suspect'">info</i>
+                        <i class="material-icons" *ngIf="karigar_detail.status =='Reject'">cancel</i>
+                        <p>{{karigar_detail.status=='Pending'? 'Pending For Verification':karigar_detail.status}}</p>
+                    </div>
+                </div>
+            </div>
+            <!--             
+                <div class="heading line mt18 mb10">
+                    <p>{{'Change Language' | translate}}</p>
+                </div>
+                <div class="radio-section">
+                    <ion-list class="choose mt10 mb10" radio-group name="gender" radio-group name="language" [(ngModel)]="karigar_detail.language" > 
+                        <ion-item *ngFor="let row of language">
+                            <ion-radio (click)="update_lang()" checked="{{row.prefix == karigar_detail.language}}" value="{{row.prefix}}"></ion-radio>
+                            <ion-label>{{karigar_detail.language != 'en' ? row.hin_language_name : row.language_name}}</ion-label>
+                        </ion-item>
+                    </ion-list>
+                </div>   -->
+                
+                
+                <div class="profile-list">
+                    <div class="list-icon" *ngIf="karigar_detail.user_type == 2">
+                        <i class="material-icons" >apartment</i> {{karigar_detail.company_name |titlecase}}
+                    </div>
+                    <div class="list-icon" *ngIf="karigar_detail.user_type == 2">
+                        <i class="material-icons" >person</i> {{karigar_detail.distributor_name |titlecase}}
+                    </div>
+                    <div class="list-icon" *ngIf="karigar_detail.user_type == 1 || karigar_detail.user_type == 2">
+                        <i class="material-icons" >cake</i> {{(karigar_detail.dob !='') ? (karigar_detail.dob| date:'d MMM,y'):('N/A')}}
+                    </div>
+                    <div class="list-icon"  *ngIf="karigar_detail.whatsapp_mobile_no ">
+                        <i class="material-icons" >whatsapp</i>{{karigar_detail.whatsapp_mobile_no ? karigar_detail.whatsapp_mobile_no : 'N/A'}}
+                    </div>
+                    <div class="list-icon"  *ngIf="karigar_detail.email ">
+                        <i class="material-icons" >email</i>{{karigar_detail.email ? karigar_detail.email : 'N/A'}}
+                    </div>
+                    <div class="list-icon">
+                        <i class="material-icons" >person_pin_circle</i> {{karigar_detail.address |titlecase}} {{!karigar_detail.state ? 'N/A' :karigar_detail.state |titlecase}} {{!karigar_detail.district ? 'N/A' : ', '+karigar_detail.district |titlecase}} {{!karigar_detail.city ? 'N/A' : ', '+karigar_detail.city
+                        |titlecase}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type == 2 || karigar_detail.user_type == 1">
+            <p>{{'Document Information' | translate}}</p>
+            <!-- <div class="little-edit">
+                <a *ngIf="edit1==''"><i class="material-icons" (click)="onUploadChange();edit1 = '1' ">edit</i></a>
+                <a *ngIf="edit1=='1'"><i class="material-icons" (click)="uploadDocImage(karigar_detail.document_image,karigar_detail.document_no,karigar_detail.document_image_back)">save</i></a>
+            </div> -->
+        </div>
+        <div class="adhar" *ngIf="karigar_detail.user_type == 2 || karigar_detail.user_type == 1">
+            <div class="doc-img">
+                <img src="{{karigar_detail.document_image ? karigar_detail.document_image : 'assets/imgs/adhar.png'}}">
+            </div>
+            <div class="doc-img" *ngIf="karigar_detail.user_type == 2 || karigar_detail.user_type == 1">
+                <img src="{{karigar_detail.document_image ? karigar_detail.document_image : 'assets/imgs/adhar.png'}}">
+            </div>
+            <p *ngIf="karigar_detail.document_type=='Adharcard'">{{'Aadhaar card Number' | translate}}</p>
+            <p *ngIf="karigar_detail.document_type=='VoterCard'">{{'VoterCard Number' | translate}}</p>
+            <p *ngIf="karigar_detail.document_type=='License'">{{'License Number' | translate}}</p>
+            <span>{{karigar_detail.document_no}}</span>
+            <!-- <h1>
+                <input class="dochidenumber" type="text" name="document_no " #document_no="ngModel" [(ngModel)]="" [readonly]="edit1 == '1'  ? false : true" required>
+            </h1> -->
+        </div>
+        <!-- <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type == 2 || karigar_detail.user_type == 1">
+            <p>{{'Aadhaar Back Side Photo' | translate}}</p>
+            <div class="little-edit">
+                <a *ngIf="edit2==''"><i class="material-icons" (click)="onUploadChange_back();edit2 = '1' ">edit</i></a>
+                <a *ngIf="edit2=='1'"><i class="material-icons" (click)="uploadDocImage(karigar_detail.document_image,karigar_detail.document_no,karigar_detail.document_image_back)">save</i></a>
+            </div>
+        </div> -->
+        <!-- <div class="adhar" >
+            <img src="{{karigar_detail.document_image_back ? karigar_detail.document_image_back : 'assets/imgs/adhar.png'}}">
+        </div> -->
+        
+        <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type == 2">
+            <p>{{'PanCard Information' | translate}}</p>
+        </div>
+        <div class="adhar" *ngIf="karigar_detail.user_type == 2">
+            <div class="doc-img">
+                <img src="{{karigar_detail.pan_image}}">
+            </div>
+            <p>{{'PanCard Number' | translate}}</p>
+            <span>{{karigar_detail.pan_no}}</span>
+            <!-- <h1>
+                <input class="dochidenumber" type="text" name="pan_no" #pan_no="ngModel" [(ngModel)]="karigar_detail.pan_no" [readonly]="edit1 == '1'  ? false : true" required>
+            </h1> -->
+        </div>
+        
+        
+        <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type != 3">
+            <p>{{'Visting Card' | translate}}</p>
+        </div>
+        <div class="adhar" *ngIf="karigar_detail.user_type != 3">
+            <div class="doc-img">
+                <img src="{{karigar_detail.visiting_image}}">
+            </div>
+        </div>
+        
+        <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type != 3">
+            <p>{{'Shop' | translate}}</p>
+        </div>
+        <div class="adhar" *ngIf="karigar_detail.user_type != 3">
+            <div class="doc-img">
+                <img src="{{karigar_detail.shop_image}}">
+            </div>
+        </div>
+        
+        <div class="heading line mt32" *ngIf="karigar_detail.user_type==1">
+            <p >{{'Dealer Information' | translate}}</p>
+        </div>
+        
+        <div class="pr-after" *ngIf="karigar_detail.user_type==1">
+            <div class="profile-detail bdr-none p0">
+                <div class="deflex mt0">
+                    <ul>
+                        <li class="wp100">
+                            <p>{{'Counter Name' | translate}}</p>
+                            <div [ngClass]="{'active' :edit == '1' } ">
+                                <input type="text" name="parent_counter_name " #parent_counter_name="ngModel" [(ngModel)]="karigar_detail.parent_counter_name " [readonly]="edit == '1'  ? false : true" required>
+                            </div>
+                        </li>
+                        <li class="bdr-top">
+                            <p>{{'Contact Person' | translate}}</p>
+                            <div><input type="text" name="parent_counter_contact_person " #parent_counter_contact_person="ngModel" [(ngModel)]="karigar_detail.parent_counter_contact_person " [readonly]="edit == '1'  ? false : true" required></div>
+                            
+                        </li>
+                        <li class="bdr-top bdr-left">
+                            <p>{{'Mobile No' | translate}}.</p>
+                            <div><input type="tel" name="parent_counter_mobile " #parent_counter_mobile="ngModel" [(ngModel)]="karigar_detail.parent_counter_mobile" (keypress)="MobileNumber($event)" [readonly]="edit == '1'  ? false : true" maxlength="10" minlength="10"
+                                required></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <ng-container *ngIf="karigar_detail.user_type != 3">
+                <div class="heading line mt16" *ngIf="karigar_detail.referral_code" (click)="share_code()">
+                    <p>{{'Referral Code Information' | translate}}</p>
+                    <div class="little-edit">
+                        <a><i class="material-icons">share</i></a>
+                    </div>
+                </div>
+                
+                <div class="pr-after" (click)="share_code()" *ngIf="karigar_detail.referral_code">
+                    <div class="profile-detail bdr-none p0 mb9">
+                        <div class="deflex m0">
+                            <ul>
+                                <li class="refcode">
+                                    <p>{{'Referral Code' | translate}}</p>
+                                    <h1>{{karigar_detail.referral_code ? karigar_detail.referral_code : 'N/A'}}</h1>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </ion-content>
+        <ion-footer *ngIf="karigar_detail.user_type != 3">
+            <ion-toolbar>
+                <button ion-button color="primary" (click)="updateProfile()" full round>Edit Profile</button>
+            </ion-toolbar>
+        </ion-footer>

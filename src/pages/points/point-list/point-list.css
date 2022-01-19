@@ -1,0 +1,104 @@
+page-point-list ion-item ion-label {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-grid-columns: 1fr 80px;
+      grid-template-columns: 1fr 80px;
+}
+
+page-point-list ion-item ion-label .left-block p {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+page-point-list ion-item ion-label span {
+  font-size: 12px;
+  line-height: 18px;
+  display: block;
+  white-space: normal;
+}
+
+page-point-list ion-item ion-label span strong {
+  color: #342501;
+}
+
+page-point-list ion-item ion-label .right-block {
+  text-align: right;
+}
+
+page-point-list ion-item ion-label .right-block h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+page-point-list ion-item ion-label .right-block.Inprocess {
+  color: #f69503;
+}
+
+page-point-list ion-item ion-label .right-block.Success {
+  color: #588f00;
+}
+
+page-point-list ion-item ion-label .right-block.Error, page-point-list ion-item ion-label .right-block.FAILURE {
+  color: #f31010;
+}
+
+page-point-list .no-history {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 300px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+page-point-list .no-history img {
+  height: 60px;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin-bottom: 10px;
+}
+
+page-point-list .no-history p {
+  margin-top: 10px !important;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+page-point-list .welcome-point {
+  padding: 10px;
+  background: #ff00000a;
+}
+
+ion-segment-button:hover {
+  background-color: red;
+}
+
+.no-history {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+}
+/*# sourceMappingURL=point-list.css.map */

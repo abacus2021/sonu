@@ -1,0 +1,168 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{prod_detail.product_name}}</ion-title>
+        <!-- <h1>{{prod_detail.product_name | titlecase}}</h1> -->
+        <!-- <p *ngIf="prod_detail.desc!=''"><strong>{{'Description' | translate}}</strong> : {{prod_detail.desc}}</p> -->
+        
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    
+    <div class="slide-image h200">
+        <!-- zoom="true" -->
+        <ion-slides class="cs-slide" *ngIf="prod_detail.image && prod_detail.image.length>1" [initialSlide]="0" pager autoplay="1000" speed="1000" loop="true">
+            <ion-slide *ngFor="let row of prod_detail.image; let i=index" (click)="viewDetail(row.image_name)">
+                <div class="swiper-zoom-container">
+                    <img [src]="upload_url+row.image_name">
+                </div>
+            </ion-slide>
+        </ion-slides>
+        <div class="swiper-zoom-container" *ngIf="prod_detail.image && prod_detail.image.length==1">
+            <img [src]="upload_url+prod_detail_image[0].image_name">
+        </div>
+        <div class="swiper-zoom-container" *ngIf="prod_detail.image_name != null ">
+            <img src="assets/imgs/default-image.png" class="h80">
+        </div>
+    </div>
+    
+    <div class="item-table">
+        <table>
+            <tr>
+                <td class="w90">Product Name</td>
+                <th>{{prod_detail.product_name}}</th>
+            </tr>
+             <tr *ngIf="prod_detail.size != '' ">
+                <td>Size</td>
+                <th>{{prod_detail.size}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.packaging_type != '' ">
+                <td>Packaging Type)</td>
+                <th>{{prod_detail.packaging_type}}</th>
+            </tr>
+          <tr *ngIf="prod_detail.inner_box_packing != '' ">
+                <td>Inner Box Packing</td>
+                <th>{{prod_detail.inner_box_packing}}</th>
+            </tr>
+             <!-- <tr *ngIf="prod_detail.locking_distance != '' ">
+                <td>Locking Distance</td>
+                <th>{{prod_detail.locking_distance}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.cup_dia_mm != '' ">
+                <td>Cup Dia (Mm)</td>
+                <th>{{prod_detail.cup_dia_mm}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.nose_dia_mm != '' ">
+                <td>Nose Dia (Mm)</td>
+                <th>{{prod_detail.nose_dia_mm}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.pipe_dia_inch != '' ">
+                <td>Pipe Dia (Inch)</td>
+                <th>{{prod_detail.pipe_dia_inch}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.no_of_holes != '' ">
+                <td>No. Of Holes</td>
+                <th>{{prod_detail.no_of_holes}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.hole_size_mm != '' ">
+                <td>Hole Size (Mm)</td>
+                <th>{{prod_detail.hole_size_mm}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.total_height != '' ">
+                <td>Total Height</td>
+                <th>{{prod_detail.total_height}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.no_of_splines != '' ">
+                <td>NO. Of Splines</td>
+                <th>{{prod_detail.no_of_splines}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.no_of_teeth != '' ">
+                <td>NO. Of Teeth</td>
+                <th>{{prod_detail.no_of_teeth}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.matching_cross_part_no != '' ">
+                <td>Matching Cross Part NO.</td>
+                <th>{{prod_detail.matching_cross_part_no}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.matching_yoke != '' ">
+                <td>Matching Yoke</td>
+                <th>{{prod_detail.matching_yoke}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.matching_teeth != '' ">
+                <td>Matching Teeth</td>
+                <th>{{prod_detail.matching_teeth}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.combination_of_part_no != '' ">
+                <td>Combination Of Part NO.</td>
+                <th>{{prod_detail.combination_of_part_no}}</th>
+            </tr>
+            <tr *ngIf="prod_detail.overall_length_sleeve != '' ">
+                <td>Overall Length Sleeve</td>
+                <th>{{prod_detail.overall_length_sleeve}}</th>
+            </tr>
+            <tr  *ngIf="prod_detail.overall_length_teeth != '' ">
+                <td>Overall Length Teeth</td>
+                <th>{{prod_detail.overall_length_teeth}}</th>
+            </tr>
+            <tr  *ngIf="prod_detail.plate_dia_sleeve != '' ">
+                <td>Plate Dia Sleeve</td>
+                <th>{{prod_detail.plate_dia_sleeve}}</th>
+            </tr>
+            <tr  *ngIf="prod_detail.plate_dia_teeth != '' ">
+                <td>Plate Dia Teeth</td>
+                <th>{{prod_detail.plate_dia_teeth}}</th>
+            </tr>
+            <tr>
+                <td>Used In</td>
+                <th>{{prod_detail.used_in ? prod_detail.used_in:'N/A'}}</th>
+            </tr> -->
+            <tr>
+                <td>Price</td>
+                <th>&#x20B9; {{prod_detail.mrp}}</th>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <th>{{prod_detail.desc}}</th>
+            </tr>
+        </table>
+    </div>
+
+    
+    
+    <div class="heading line mt0 mb10">
+        <p>Related Products</p>
+    </div>
+    
+    <div class="carousel sm-label-font" *ngIf="assign_prod && assign_prod.length" >
+        
+        <div class="carousel-item" *ngFor="let row of assign_prod; let i=index"  (click)="getProductDetail(row.id)">
+            <div class="img-section">
+                <img [src]="upload_url+row.image_name" *ngIf="row.image_name != null">
+                <img src="assets/imgs/default-image.png" class="h40" *ngIf="row.image_name == null">
+            </div>
+            <label style="background-color: #e63036;">{{row.product_name}}</label>
+            <!-- <label>{{row.product_code}}</label> -->
+            <label style="background-color: #e63036;">&#x20B9; {{row.mrp}}</label>
+        </div>
+    </div>
+    
+    
+    
+    <!-- <div class="slide-image h100" style="display: none;">
+        <ion-slides class="cs-slide" *ngIf="assign_prod && assign_prod.length">
+            <ion-slide *ngFor="let row of assign_prod; let i=index" >
+                <ng-container >
+                    <div class="swiper-zoom-container">
+                        <img [src]="upload_url+row[0].image_name">
+                    </div>
+                    <p>{{row[0].product_name}}</p>
+                    <p>{{row[0].product_code}}</p>
+                    <p>{{row[0].mrp}}</p>
+                </ng-container>
+            </ion-slide>
+        </ion-slides>
+    </div> -->
+    <!-- <div class="" *ngFor="let val of assign_prod">
+        {{val[0].product_code}}
+    </div> -->
+</ion-content>

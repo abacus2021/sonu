@@ -1,0 +1,17 @@
+page-home {
+    
+    .company-logo{
+        display: flex;
+
+        img{
+            // width: 60px;
+            height: 29px;
+            object-fit: contain;
+        }
+    }
+
+    .share-text{
+        font-size: 11px;
+        text-transform: capitalize;
+    }
+}
