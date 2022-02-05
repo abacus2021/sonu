@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Loading,LoadingController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import * as jwt_decode from "jwt-decode";
 import { TranslateService } from '@ngx-translate/core';
@@ -14,11 +14,15 @@ export class ContactPage {
   
   tokenInfo:any={};
   lang:any='';
-  constructor(public navCtrl: NavController, public navParams: NavParams,private app:App,public db:DbserviceProvider,public storage:Storage,public translate:TranslateService) {
+  loading:Loading;
+  profile_data:any='';
+  constructor(public loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams,private app:App,public db:DbserviceProvider,public storage:Storage,public translate:TranslateService) {
   }
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContactPage');
+    this. getCompanyprofile()
+    this.get_user_lang();
   }
 
   ionViewDidLeave()
@@ -70,5 +74,31 @@ export class ContactPage {
     catch(Error){
       return null;
     }
+  }
+ 
+ 
+  
+  getCompanyprofile()
+  {
+      this.presentLoading();
+      
+      this.db.post_rqst({},'app_karigar/companyProfile')
+      .subscribe( (response)=>
+      {
+          console.log(response);
+          this.loading.dismiss();
+          this.profile_data=response.getData;
+      })
+  }
+  presentLoading() 
+  {
+      this.translate.get("Please wait...")
+      .subscribe(resp=>{
+          this.loading = this.loadingCtrl.create({
+              content: resp,
+              dismissOnPageChange: false
+          });
+          this.loading.present();
+      })
   }
 }

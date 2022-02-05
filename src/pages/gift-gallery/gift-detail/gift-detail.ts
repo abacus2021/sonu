@@ -26,19 +26,21 @@ export class GiftDetailPage {
     tokenInfo:any={};
     lang:any='';
     uploadUrl:any='';
+    offer_id:number=0;
     constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public service:DbserviceProvider,public loadingCtrl:LoadingController,private app: App,public storage:Storage,public translate:TranslateService,public db:DbserviceProvider,public constant:ConstantProvider,public toastCtrl:ToastController) {}
     
     ionViewDidLoad() {
         this.uploadUrl = this.constant.upload_url
         console.log('ionViewDidLoad GiftDetailPage');
         this.gift_id = this.navParams.get('id');
+        this.offer_id = this.navParams.get('offer_id');
         this.getGiftDetail(this.gift_id)
         this.presentLoading();
         this.get_user_lang();
     }
     
     presentCancelPolicyModal() {
-        let contactModal = this.modalCtrl.create(CancelpolicyModalPage,{'karigar_id':this.service.karigar_id,'gift_id':this.gift_id});
+        let contactModal = this.modalCtrl.create(CancelpolicyModalPage,{'karigar_id':this.service.karigar_id,'gift_id':this.gift_id,"offer_id":this.offer_id,"Null_offer_id":this.offer_id});
         contactModal.present();
         console.log('otp');
     }
@@ -76,12 +78,15 @@ export class GiftDetailPage {
     getGiftDetail(gift_id)
     {
         console.log(gift_id);
-        this.service.post_rqst({'gift_id' :gift_id,'karigar_id':this.service.karigar_id,'id':''},'app_karigar/giftDetail')
+        this.service.post_rqst({'gift_id' :gift_id,'karigar_id':this.service.karigar_id,'id':'',"offer_id":this.offer_id},'app_karigar/giftDetail')
         .subscribe( (r) =>
         {
             console.log(r);
             this.loading.dismiss();
             this.gift_detail=r['gift'];
+            this.offer_id = r['offer_id']
+
+            console.log("offer_id",this.offer_id)
             this.rating_star=parseInt(r['gift'].rating);
             console.log(this.gift_detail);
             

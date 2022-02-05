@@ -41,9 +41,12 @@
                 <img [src]="gift_detail.image">
             </div>
         </div>
-        <div class="lorem-text" *ngIf="gift_detail.gift_specification != ''">
-            <p><Strong>Specification : <div [innerHTML]="gift_detail.gift_specification"> </div></Strong></p>
+        <div *ngIf="offer_id != 0">
+            <div class="lorem-text" *ngIf="gift_detail.gift_specification != ''">
+                <p><Strong>Specification : <div [innerHTML]="gift_detail.gift_specification"> </div></Strong></p>
+            </div>
         </div>
+        
         <div class="fix-btn" *ngIf="receive_status == null">
             <button ion-item class="cs-btn btn-radius mb0" (click)="recvConfirmation(gift_detail.id)">Click Here if you Recieve</button>
         </div>

@@ -76,6 +76,12 @@
             </div>
         </div>
         <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type == 2 || karigar_detail.user_type == 1">
+            <p>{{'Customer Category' | translate}}</p>
+          
+        </div>
+        <p style="padding-left: 20px!important;">{{karigar_detail.user_category == '2_Wheeler'? '2 Wheeler' : '4 Wheeler' }}</p>
+
+        <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type == 2 || karigar_detail.user_type == 1">
             <p>{{'Document Information' | translate}}</p>
             <!-- <div class="little-edit">
                 <a *ngIf="edit1==''"><i class="material-icons" (click)="onUploadChange();edit1 = '1' ">edit</i></a>
@@ -124,7 +130,7 @@
         
         
         <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type != 3">
-            <p>{{'Visting Card' | translate}}</p>
+            <p>{{'Visting Card/Shop' | translate}}</p>
         </div>
         <div class="adhar" *ngIf="karigar_detail.user_type != 3">
             <div class="doc-img">
@@ -132,14 +138,14 @@
             </div>
         </div>
         
-        <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type != 3">
+        <!-- <div class="heading line mt18 mb16" *ngIf="karigar_detail.user_type != 3">
             <p>{{'Shop' | translate}}</p>
         </div>
         <div class="adhar" *ngIf="karigar_detail.user_type != 3">
             <div class="doc-img">
                 <img src="{{karigar_detail.shop_image}}">
             </div>
-        </div>
+        </div> -->
         
         <div class="heading line mt32" *ngIf="karigar_detail.user_type==1">
             <p >{{'Dealer Information' | translate}}</p>

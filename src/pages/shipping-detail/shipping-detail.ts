@@ -20,6 +20,7 @@ export class ShippingDetailPage {
   karigar_gift:any={};
   edit:any='';
   upload_url:any='';
+  offer_id:any='';
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public service:DbserviceProvider,public loadingCtrl:LoadingController,public alertCtrl:AlertController,private app: App, private InAppBrowser: InAppBrowser,public constn:ConstantProvider) {
   }
@@ -60,6 +61,8 @@ export class ShippingDetailPage {
           console.log(r);
           this.loading.dismiss();
           this.gift_detail=r['gift'];
+          this.offer_id=r['gift']['offer_id'];
+          console.log('offer id  ====>',this.offer_id)
           this.karigar_gift=r['karigar_gift']
           if(r['karigar_gift'] != null)
           {

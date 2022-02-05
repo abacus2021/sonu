@@ -38,6 +38,7 @@
     "@ionic/storage": "2.2.0",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "cordova-android": "9.1.0",
     "cordova-android-firebase-gradle-release": "^1.0.3",
     "cordova-browser": "6.0.0",
     "cordova-plugin-actionsheet": "2.3.3",

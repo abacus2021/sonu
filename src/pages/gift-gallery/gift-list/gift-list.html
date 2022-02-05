@@ -17,18 +17,27 @@
             <p>{{'Balance Points' | translate}}</p>
             <h1>{{total_balance_point}}</h1>
         </div>
-        <div class="search mt16">
+        <!-- <div class="search mt16">
             <ion-searchbar type='text' placeholder="{{'Search' | translate}}" name='search' #search="ngModel" [(ngModel)]="filter.search" (ngModelChange)="getGiftList(filter.search)"></ion-searchbar>
+        </div> -->
+        <div class="pr16 pl16 pt16">
+            <ion-item class="multi-select">
+                <ion-label class="mt0 mb0">{{'Point wise filter' | translate}}</ion-label>
+                <ion-select class="pt0 pb0"  name="coupon_points"  #coupon_points="ngModel"  [(ngModel)]="data.coupon_points"(ngModelChange)="getGiftList(data.coupon_points,'number')" >
+                    <ion-option *ngFor="let row of point"   value="{{row.coupon_points}}">{{row.coupon_points}}</ion-option>
+                </ion-select>
+            </ion-item>
         </div>
+       
     </div>
-    <div class="pl16 pr16 mt16">
+    <div class="pl16 pr16">
         <div class="gift-list" [ngClass]="{'verified' : intVal(list.coupon_points) <= intVal(list.offer_balance)  }" *ngFor="let list of gift_list; let i=index" (click)="goOnGiftDetail(list.id,list.coupon_points)">
             <div class="list-item">
                 <div class="head-detail">
                     <div class="head">
                         <span><strong>{{list.coupon_points}} Points</strong></span>
                         <p class="bold-text">{{list.gift_title}}</p>
-                        <p class="bold-text">{{list.title}} | {{list.end_date | date:'d MMMM y'}}</p>
+                        <p class="bold-text" *ngIf="list.offer_id != 0">{{list.title}} | {{list.end_date | date:'d MMMM y'}}</p>
                     </div>
                 </div>  
                 <div class="product-img">

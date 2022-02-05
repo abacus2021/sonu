@@ -151,10 +151,13 @@ export class HomePage {
             alert('test');
         // })
     }
-    
+    EnterCouponCode(){
+        this.navCtrl.push(CoupanCodePage)
+    }
     
     qr_count:any=0;
     qr_limit:any=0;
+    
     scan()
     {
 
@@ -193,7 +196,7 @@ export class HomePage {
                             .subscribe((r:any)=>
                             {
                                 console.log(r);
-                                
+                                console.log("no ofer ======>",r['status'])
                                 if(r['status'] == 'INVALID'){
                                     this.translate.get("Invalid Coupon Code")
                                     .subscribe(resp=>{
@@ -203,6 +206,13 @@ export class HomePage {
                                 }
                                 else if(r['status'] == 'NOTAUTHORISED'){
                                     this.translate.get("Coupon not authorised")
+                                    .subscribe(resp=>{
+                                        this.showAlert(resp);
+                                    })
+                                    return;
+                                }
+                                else if(r['status'] == 'NO-OFFER'){
+                                    this.translate.get("No Offer Available")
                                     .subscribe(resp=>{
                                         this.showAlert(resp);
                                     })
@@ -222,7 +232,7 @@ export class HomePage {
                                     })
                                     return;
                                 }
-                                this.translate.get("points has been added into your wallet")
+                                this.translate.get("  points has been added into your wallet")
                                 .subscribe(resp=>{
                                     this.showSuccess( r['coupon_value'] +resp)
                                 })

@@ -52,7 +52,7 @@ export class OffersPage {
     
     goOnGiftDetail(id){
         console.log(id);
-        this.navCtrl.push(GiftDetailPage,{'id':id})
+        this.navCtrl.push(GiftDetailPage,{'id':id,"offer_id":this.offer_detail.id})
     }
     
     get_user_lang()
@@ -115,6 +115,7 @@ export class OffersPage {
             console.log(r);
             this.loading.dismiss();
             this.offer_detail=r['offer'];
+            console.log("offer_id===>",this.offer_detail.id)
             this.gift_list=r['gift'];
             var referral_per = r['referral_percentage'];
             var referral_per_amt = ((r['karigar'].referal_point_balance * referral_per.one_time_percentage)/100);

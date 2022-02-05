@@ -23,7 +23,8 @@ export class CancelpolicyModalPage {
     gift_id:any='';
     gift_detail:any='';
     loading:Loading;
-    
+    offer_id:number=0;
+    Null_offer_id:number=0;
     
     constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public service:DbserviceProvider,public alertCtrl:AlertController,public loadingCtrl:LoadingController) {
     }
@@ -33,6 +34,11 @@ export class CancelpolicyModalPage {
         this.karigar_id = this.navParams.get('karigar_id');
         console.log(this.karigar_id);
         this.gift_id = this.navParams.get('gift_id');
+        this.offer_id = this.navParams.get('offer_id');
+        this.Null_offer_id = this.navParams.get('Null_offer_id');
+        if(this.Null_offer_id == 0 ){
+            this.offer_id = 0 
+        }
         console.log(this.gift_id);
         this.getOtpDetail();
         this.presentLoading();
@@ -51,7 +57,7 @@ export class CancelpolicyModalPage {
     getOtpDetail()
     {
         console.log('otp');
-        this.service.post_rqst({'karigar_id':this.service.karigar_id,'gift_id':this.gift_id},'app_karigar/sendOtp')
+        this.service.post_rqst({'karigar_id':this.service.karigar_id,'gift_id':this.gift_id,  'offer_id':this.offer_id},'app_karigar/sendOtp')
         .subscribe((r)=>
         {
             console.log(r);
@@ -88,7 +94,7 @@ export class CancelpolicyModalPage {
         this.presentLoading();
         console.log('data');
         console.log(this.data);
-        this.service.post_rqst( {'karigar_id':this.service.karigar_id ,"gift_id": this.gift_id,'offer_id':this.gift_detail.offer_id,'shipping_address':this.data.shipping_address},'app_karigar/redeemRequest')
+        this.service.post_rqst( {'karigar_id':this.service.karigar_id ,"gift_id": this.gift_id,'shipping_address':this.data.shipping_address,"offer_id":this.offer_id },'app_karigar/redeemRequest')
         .subscribe( (r) =>
         {
             this.loading.dismiss();

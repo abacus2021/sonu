@@ -10,7 +10,7 @@
         <div class="modal-content in-modal">
             <form #f="ngForm">
                 <h1>Magsol</h1>
-                <p class="highligt-error" *ngIf="karigar_detail.document_image == '' || karigar_detail.document_no == ''">* Your document details are missing !</p>
+                <p class="highligt-error" *ngIf="karigar_detail.document_type == '' || karigar_detail.document_image == '' || karigar_detail.document_no == ''">* Your document details are missing !</p>
 
                 <p>Are you sure to redeem your {{gift_detail.coupon_points}} points?</p>
 
@@ -48,11 +48,11 @@
                     <ion-item>
                         <ion-checkbox color="secondary" checked="true" name="check" #check="ngModel" [(ngModel)]="data.check" required></ion-checkbox>
                     </ion-item>
-                    <p>I have read <a (click)="goOnCancelationPolicy()">cancelation policy</a></p>
+                    <p>I have read <a (click)="goOnCancelationPolicy()">Cancellation policy</a></p>
                 </div>
                 <div class="footer-btn">
                     <button class="outline-btn" (click)="dismiss()">No</button>
-                    <button class="fill-btn" [disabled]="!data.check ||!data.otp ||!otp_value || karigar_detail.document_image == '' || karigar_detail.document_no == '' " (click)="f.form.valid && submit()">Yes</button>
+                    <button class="fill-btn" [disabled]="!data.check || !karigar_detail.document_type || !data.otp ||!otp_value || karigar_detail.document_image == '' || karigar_detail.document_no == '' " (click)="f.form.valid && submit()">Yes</button>
                 </div>
             </form>
         </div>

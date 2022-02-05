@@ -22,6 +22,8 @@ export class GiftListPage {
     tokenInfo:any={};
     lang:any='';
     uploadUrl:any='';
+    point:any=''; 
+    data:any={}
     constructor(public navCtrl: NavController, public navParams: NavParams,public service:DbserviceProvider,public loadingCtrl:LoadingController,private app: App,public storage:Storage,public translate:TranslateService,public db:DbserviceProvider,public constant:ConstantProvider) {
         this.mode = this.navParams.get('mode');
         console.log(this.mode);
@@ -35,6 +37,10 @@ export class GiftListPage {
             this.mode= '';
             console.log( this.mode);
         }
+        if (this.data.coupon_points) {
+            console.log(this.data.coupon_points)
+            this.getGiftList(this.data.coupon_points,'');
+        }
     }
     
     
@@ -44,13 +50,15 @@ export class GiftListPage {
         this.uploadUrl = this.constant.upload_url;
         this.get_user_lang();
         this.presentLoading();
+        this.pointList();
     }
     ionViewWillEnter()
     {
         this.get_user_lang();
-        this.getGiftList('');
+        this.getGiftList('','');
     }
     
+   
     get_user_lang()
     {
         this.storage.get("token")
@@ -81,7 +89,9 @@ export class GiftListPage {
     doRefresh(refresher) 
     {
         console.log('Begin async operation', refresher);
-        this.getGiftList(''); 
+        this.data.coupon_points = {}
+        this.getGiftList('',''); 
+        this.pointList();
         refresher.complete();
     }
     
@@ -91,10 +101,13 @@ export class GiftListPage {
     
     total_balance_point:any=0;
     
-    getGiftList(search)
+    getGiftList(search,number)
     {
+        console.log(search,number)
         this.filter.limit=0;
         this.filter.search=search;
+        // console.log(this.data.coupon_points)
+        this.filter.search =search
         this.filter.redeemable = this.mode;
         console.log(this.filter.search);
         this.service.post_rqst({'filter' : this.filter,'karigar_id':this.service.karigar_id},'app_karigar/giftList')
@@ -118,6 +131,16 @@ export class GiftListPage {
                 this.gift_list[i].offer_balance = this.balance_point + (referral_amount);
 
             }
+            // end
+        });
+    }
+    pointList()
+    {
+        this.service.post_rqst({},'app_karigar/gift_points')
+        .subscribe( (r) =>
+        {
+            console.log(r);
+            this.point = r['gift_coupon_points']
             // end
         });
     }

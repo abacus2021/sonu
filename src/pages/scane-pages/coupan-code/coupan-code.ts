@@ -46,6 +46,10 @@ export class CoupanCodePage {
         this.showAlert("Please Enter Coupon Code");
         return;
       }
+      else if(r['status'] == 'NO-OFFER'){
+        this.showAlert("No Offer Available");
+        return;
+      }
       else if(r['status'] == 'USED'){
         this.showAlert("Coupon Already Used");
         return;

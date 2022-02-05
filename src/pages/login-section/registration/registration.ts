@@ -42,7 +42,7 @@ export class RegistrationPage {
         
         this.data.user_type=2;
         this.data.mobile_no = this.navParams.get('mobile_no');
-        this.data.document_type='Adharcard';
+        // this.data.document_type='Adharcard';
         this.today_date = new Date().toISOString().slice(0,10);
         this.data.profile='';
         this.data.document_image='';
@@ -228,34 +228,34 @@ export class RegistrationPage {
             // this.data.state =this.data.state.state_name;
             // this.data.district =this.data.district.district_name;
             
-            if(!this.data.profile){
-                const toast = this.toastCtrl.create({
-                    message: 'Profile image required',
-                    duration: 3000
-                });
-                toast.present();
-                return
-            }
+            // if(!this.data.profile){
+            //     const toast = this.toastCtrl.create({
+            //         message: 'Profile image required',
+            //         duration: 3000
+            //     });
+            //     toast.present();
+            //     return
+            // }
             
-            if(!this.data.document_image){
-                const toast = this.toastCtrl.create({
-                    message: 'Document image required',
-                    duration: 3000
-                });
-                toast.present();
-                return
-            }
+            // if(!this.data.document_image){
+            //     const toast = this.toastCtrl.create({
+            //         message: 'Document image required',
+            //         duration: 3000
+            //     });
+            //     toast.present();
+            //     return
+            // }
             
-            if(this.data.user_type == '2'){
-                if(!this.data.pan_image){
-                    const toast = this.toastCtrl.create({
-                        message: 'Pancard image required',
-                        duration: 3000
-                    });
-                    toast.present();
-                    return
-                }
-            }
+            // if(this.data.user_type == '2'){
+            //     if(!this.data.pan_image){
+            //         const toast = this.toastCtrl.create({
+            //             message: 'Pancard image required',
+            //             duration: 3000
+            //         });
+            //         toast.present();
+            //         return
+            //     }
+            // }
             
             if(this.data.dealer_counter_name)
             {

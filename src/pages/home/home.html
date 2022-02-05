@@ -107,6 +107,12 @@
                     </div>
                     <p>{{'Scan' | translate}}</p>
                 </li>
+                <li (click)="EnterCouponCode()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
+                    <div class="img-view">
+                        <img src="assets/imgs/scan.svg">
+                    </div>
+                    <p>{{'Enter Coupon Code' | translate}}</p>
+                </li>
 
                 <li (click)="goOnPointeListPage()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                     <div class="img-view">
@@ -172,20 +178,19 @@
                     <p>{{'Products' | translate}}</p>
                 </li>
 
-                <li (click)="goOnAdvanceTextPage()">
+                <!-- <li (click)="goOnAdvanceTextPage()">
                     <div class="img-view">
                         <img src="assets/imgs/home-icon/company.svg">
                     </div>
                     <p>{{'About Us' | translate}}</p>
-                </li>
-                <li (click)="gotoChangeLang()">
+                </li> -->
+                <!-- <li (click)="gotoChangeLang()">
                     <div class="img-view">
                         <img src="assets/imgs/home-icon/language_icon.svg">
                     </div>
                     <p>{{'Change Language' | translate}}</p>
-                </li>
-               
-              
+                </li> -->
+
                 <li (click)="goOnGiftListPage1()" *ngIf="karigar_detail.user_type!=3 && karigar_detail.status =='Verified'">
                     <div class="img-view">
                         <img src="assets/imgs/home-icon/wallet.svg">

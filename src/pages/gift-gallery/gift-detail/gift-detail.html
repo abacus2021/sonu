@@ -17,7 +17,7 @@
 
             </div>
             <div class="phone-img">
-                <img src="{{gift_detail.image}}">
+                <img [src]="gift_detail.image">
 
             </div>
         </div>
@@ -28,14 +28,14 @@
                 </div>
                 <div class="info" (click)="goOnOfferDetailPage(gift_detail.offer_id)">
                     <h1>{{lang !='en' ? gift_detail.hin_title : gift_detail.title | titlecase}}</h1>
-                    <p><span>{{'Valid Upto' | translate}} :</span> {{gift_detail.end_date | date:'d MMMM y'}}</p>
+                    <p *ngIf="offer_id != 0"><span>{{'Valid Upto' | translate}} :</span> {{gift_detail.end_date | date:'d MMMM y'}}</p>
                 </div>
             </div>
-            <div class="product-icon">
-                <i class="material-icons">keyboard_arrow_right</i>
+            <div class="product-icon" >
+                <i *ngIf="offer_id != 0" class="material-icons">keyboard_arrow_right</i>
             </div>
         </div>
-        <div class="rating">
+        <div class="rating" *ngIf="offer_id != 0">
             <i class="material-icons" [ngClass]="{'active':rating_star>=1}">star_rate</i>
             <i class="material-icons" [ngClass]="{'active':rating_star>=2}">star_rate</i>
             <i class="material-icons" [ngClass]="{'active':rating_star>=3}">star_rate</i>
@@ -44,14 +44,14 @@
             <p>{{rating_star}} {{'Star' | translate}} - {{gift_detail.votes}} {{'Votes' | translate}} </p>
         </div>
         <div class="lorem-text">
-            <p>
+            <p *ngIf="offer_id != 0">
                 <Strong>{{'Specification' | translate}} : <div [innerHTML]="lang !='en' ? gift_detail.hin_gift_specification : gift_detail.gift_specification"></div> </Strong>
             </p>
         </div>
         <button ion-item class="cs-btn btn-radius mb0" (click)="presentCancelPolicyModal()" *ngIf="offer_balance >= gift_detail.coupon_points">{{'Send Redeem Request' | translate}}</button>
         <div class="h32"></div>
     </div>
-    <div class="fix-item">
+    <div class="fix-item"  *ngIf="offer_id != 0">
         <p>{{'Rate a Gift' | translate}}</p>
         <i class="material-icons" [ngClass]="{'active':star>=1}" (click)="rating('1')">star_rate</i>
         <i class="material-icons" [ngClass]="{'active':star>=2}" (click)="rating('2')">star_rate</i>
